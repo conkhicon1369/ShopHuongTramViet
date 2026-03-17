@@ -1,291 +1,438 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Giới Thiệu - Hương Trầm Việt</title>
-    <link rel="icon" href="./img/logo0.png" type="image/png">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="css.css">
-</head>
-<body>
+    <link rel="icon" href="./img/logo0.png" type="image/png" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+    />
+    <link rel="stylesheet" href="css.css" />
+  </head>
+  <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
-        <div class="container">
-            <a class="navbar-brand" href="index.html">
-                <i class="bi bi-yin-yang me-2"></i>Hương Trầm Việt
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto align-items-center">
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.html">Trang Chủ</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="product.html">Sản Phẩm</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="about.html">Giới Thiệu</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="contact.html">Liên Hệ</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link position-relative" href="cart.html">
-                            <i class="bi bi-cart3"></i> Giỏ Hàng
-                            <span class="badge bg-danger" id="cartBadge" style="display: none;">0</span>
-                        </a>
-                    </li>
-                    <li class="nav-item" id="guestSection">
-                        <a class="nav-link btn btn-outline-light btn-sm ms-3" href="login.html">
-                            <i class="bi bi-person"></i> Đăng Nhập
-                        </a>
-                    </li>
-                    <li class="nav-item dropdown" id="userSection" style="display: none;">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                            <i class="bi bi-person-circle"></i> <span id="userNameDisplay"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#"><i class="bi bi-person"></i> Tài khoản</a></li>
-                            <li><a class="dropdown-item" href="#"><i class="bi bi-box-seam"></i> Đơn hàng</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#" onclick="logout()"><i class="bi bi-box-arrow-right"></i> Đăng xuất</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
+      <div class="container">
+        <a class="navbar-brand" href="index.html">
+          <i class="bi bi-yin-yang me-2"></i>Hương Trầm Việt
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto align-items-center">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Trang Chủ</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="product.html">Sản Phẩm</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="about.html">Giới Thiệu</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="contact.html">Liên Hệ</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link position-relative" href="cart.html">
+                <i class="bi bi-cart3"></i> Giỏ Hàng
+                <span
+                  class="badge bg-danger"
+                  id="cartBadge"
+                  style="display: none"
+                  >0</span
+                >
+              </a>
+            </li>
+            <li class="nav-item" id="guestSection">
+              <a
+                class="nav-link btn btn-outline-light btn-sm ms-3"
+                href="login.html"
+              >
+                <i class="bi bi-person"></i> Đăng Nhập
+              </a>
+            </li>
+            <li
+              class="nav-item dropdown"
+              id="userSection"
+              style="display: none"
+            >
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                role="button"
+                data-bs-toggle="dropdown"
+              >
+                <i class="bi bi-person-circle"></i>
+                <span id="userNameDisplay"></span>
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a class="dropdown-item" href="#"
+                    ><i class="bi bi-person"></i> Tài khoản</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#"
+                    ><i class="bi bi-box-seam"></i> Đơn hàng</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li>
+                  <a class="dropdown-item" href="#" onclick="logout()"
+                    ><i class="bi bi-box-arrow-right"></i> Đăng xuất</a
+                  >
+                </li>
+              </ul>
+            </li>
+          </ul>
         </div>
+      </div>
     </nav>
 
     <!-- Page Header -->
     <section class="page-header text-center">
-        <div class="container">
-            <h1 class="display-4 fw-bold mb-3">Về Chúng Tôi</h1>
-            <p class="lead">Câu chuyện của Hương Trầm Việt</p>
-        </div>
+      <div class="container">
+        <h1 class="display-4 fw-bold mb-3">Về Chúng Tôi</h1>
+        <p class="lead">Câu chuyện của Hương Trầm Việt</p>
+      </div>
     </section>
 
     <!-- Story Section -->
     <section class="py-5 story-section">
-        <div class="container">
-            <div class="row align-items-center mb-5">
-                <div class="col-lg-6 mb-4 mb-lg-0">
-                    <img src="./img/logo0.png "
-                         alt="Về Hương Trầm Việt" class="img-fluid">
-                </div>
-                <div class="col-lg-6">
-                    <h2 class="fw-bold mb-4 text-primary-custom">Câu Chuyện Của Chúng Tôi</h2>
-                    <p class="lead">Hương Trầm Việt được thành lập từ niềm đam mê bảo tồn và phát triển nghề làm nhang trầm truyền thống Việt Nam.</p>
-                    <p>Với hơn 15 năm kinh nghiệm trong ngành, chúng tôi tự hào mang đến cho khách hàng những sản phẩm nhang trầm hương cao cấp, được chế tác từ 100% nguyên liệu thiên nhiên.</p>
-                    <p>Mỗi sản phẩm của chúng tôi đều được làm thủ công tỉ mỉ, kết hợp giữa công thức truyền thống và công nghệ hiện đại, đảm bảo chất lượng tốt nhất cho không gian sống của bạn.</p>
-                </div>
-            </div>
+      <div class="container">
+        <div class="row align-items-center mb-5">
+          <div class="col-lg-6 mb-4 mb-lg-0">
+            <img
+              src="./img/logo0.png "
+              alt="Về Hương Trầm Việt"
+              class="img-fluid"
+            />
+          </div>
+          <div class="col-lg-6">
+            <h2 class="fw-bold mb-4 text-primary-custom">
+              Câu Chuyện Của Chúng Tôi
+            </h2>
+            <p class="lead">
+              Hương Trầm Việt được thành lập từ niềm đam mê bảo tồn và phát
+              triển nghề làm nhang trầm truyền thống Việt Nam.
+            </p>
+            <p>
+              Với hơn 15 năm kinh nghiệm trong ngành, chúng tôi tự hào mang đến
+              cho khách hàng những sản phẩm nhang trầm hương cao cấp, được chế
+              tác từ 100% nguyên liệu thiên nhiên.
+            </p>
+            <p>
+              Mỗi sản phẩm của chúng tôi đều được làm thủ công tỉ mỉ, kết hợp
+              giữa công thức truyền thống và công nghệ hiện đại, đảm bảo chất
+              lượng tốt nhất cho không gian sống của bạn.
+            </p>
+          </div>
         </div>
+      </div>
     </section>
 
     <!-- Mission Section -->
     <section class="py-5 bg-light">
-        <div class="container">
-            <h2 class="text-center fw-bold mb-5 text-primary-custom">Sứ Mệnh & Tầm Nhìn</h2>
-            <div class="row g-4">
-                <div class="col-md-4">
-                    <div class="mission-card">
-                        <div class="mission-icon">
-                            <i class="bi bi-bullseye text-white" style="font-size: 2rem;"></i>
-                        </div>
-                        <h4 class="text-center mb-3 text-primary-custom">Sứ Mệnh</h4>
-                        <p class="text-center">Mang đến những sản phẩm nhang trầm hương thiên nhiên cao cấp, góp phần tạo nên không gian sống thanh tịnh và bình yên cho mọi gia đình Việt.</p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="mission-card">
-                        <div class="mission-icon">
-                            <i class="bi bi-eye text-white" style="font-size: 2rem;"></i>
-                        </div>
-                        <h4 class="text-center mb-3 text-primary-custom">Tầm Nhìn</h4>
-                        <p class="text-center">Trở thành thương hiệu nhang trầm hương hàng đầu Việt Nam, được công nhận về chất lượng và uy tín, mở rộng ra thị trường quốc tế.</p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="mission-card">
-                        <div class="mission-icon">
-                            <i class="bi bi-heart text-white" style="font-size: 2rem;"></i>
-                        </div>
-                        <h4 class="text-center mb-3 text-primary-custom">Giá Trị</h4>
-                        <p class="text-center">Chất lượng - Uy tín - Tận tâm. Chúng tôi cam kết mang đến sự hài lòng tuyệt đối cho khách hàng bằng sản phẩm và dịch vụ tốt nhất.</p>
-                    </div>
-                </div>
+      <div class="container">
+        <h2 class="text-center fw-bold mb-5 text-primary-custom">
+          Sứ Mệnh & Tầm Nhìn
+        </h2>
+        <div class="row g-4">
+          <div class="col-md-4">
+            <div class="mission-card">
+              <div class="mission-icon">
+                <i
+                  class="bi bi-bullseye text-white"
+                  style="font-size: 2rem"
+                ></i>
+              </div>
+              <h4 class="text-center mb-3 text-primary-custom">Sứ Mệnh</h4>
+              <p class="text-center">
+                Mang đến những sản phẩm nhang trầm hương thiên nhiên cao cấp,
+                góp phần tạo nên không gian sống thanh tịnh và bình yên cho mọi
+                gia đình Việt.
+              </p>
             </div>
+          </div>
+          <div class="col-md-4">
+            <div class="mission-card">
+              <div class="mission-icon">
+                <i class="bi bi-eye text-white" style="font-size: 2rem"></i>
+              </div>
+              <h4 class="text-center mb-3 text-primary-custom">Tầm Nhìn</h4>
+              <p class="text-center">
+                Trở thành thương hiệu nhang trầm hương hàng đầu Việt Nam, được
+                công nhận về chất lượng và uy tín, mở rộng ra thị trường quốc
+                tế.
+              </p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="mission-card">
+              <div class="mission-icon">
+                <i class="bi bi-heart text-white" style="font-size: 2rem"></i>
+              </div>
+              <h4 class="text-center mb-3 text-primary-custom">Giá Trị</h4>
+              <p class="text-center">
+                Chất lượng - Uy tín - Tận tâm. Chúng tôi cam kết mang đến sự hài
+                lòng tuyệt đối cho khách hàng bằng sản phẩm và dịch vụ tốt nhất.
+              </p>
+            </div>
+          </div>
         </div>
+      </div>
     </section>
 
     <!-- Timeline Section -->
-    <section class="py-5">
-        <div class="container">
-            <h2 class="text-center fw-bold mb-5 text-primary-custom">Hành Trình Phát Triển</h2>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <span class="timeline-year">2009</span>
-                    <h5 class="fw-bold mt-3">Khởi Đầu</h5>
-                    <p>Hương Trầm Việt được thành lập với xưởng nhỏ đầu tiên tại TP.HCM, tập trung vào việc nghiên cứu và phát triển công thức nhang trầm truyền thống.</p>
-                </div>
-                <div class="timeline-item">
-                    <span class="timeline-year">2012</span>
-                    <h5 class="fw-bold mt-3">Mở Rộng Sản Xuất</h5>
-                    <p>Đầu tư nhà máy sản xuất hiện đại, áp dụng công nghệ tiên tiến nhưng vẫn giữ được nét truyền thống trong quy trình làm nhang.</p>
-                </div>
-                <div class="timeline-item">
-                    <span class="timeline-year">2016</span>
-                    <h5 class="fw-bold mt-3">Thương Hiệu Uy Tín</h5>
-                    <p>Nhận chứng nhận ISO về chất lượng sản phẩm và trở thành một trong những thương hiệu nhang trầm uy tín tại Việt Nam.</p>
-                </div>
-                <div class="timeline-item">
-                    <span class="timeline-year">2020</span>
-                    <h5 class="fw-bold mt-3">Phát Triển Đa Kênh</h5>
-                    <p>Ra mắt hệ thống cửa hàng và website thương mại điện tử, mang sản phẩm đến gần hơn với khách hàng trên toàn quốc.</p>
-                </div>
-                <div class="timeline-item">
-                    <span class="timeline-year">2024</span>
-                    <h5 class="fw-bold mt-3">Hướng Tới Tương Lai</h5>
-                    <p>Tiếp tục nghiên cứu, phát triển sản phẩm mới và chuẩn bị mở rộng thị trường ra nước ngoài, quảng bá văn hóa Việt Nam đến thế giới.</p>
-                </div>
-            </div>
+    <section class="timeline-section">
+      <h2>Hành Trình Phát Triển</h2>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-icon pink"></div>
+          <div class="timeline-content">
+            <div class="time">2009 - 2010</div>
+            <h4>Khởi Đầu</h4>
+            <p>
+              Hương Trầm Việt được thành lập với xưởng nhỏ đầu tiên tại TP.HCM,
+              tập trung vào việc nghiên cứu và phát triển công thức nhang trầm
+              truyền thống.
+            </p>
+          </div>
         </div>
+
+        <div class="timeline-item">
+          <div class="timeline-icon blue"></div>
+          <div class="timeline-content">
+            <div class="time">2012 - 2013</div>
+            <h4>Mở Rộng</h4>
+            <p>
+              Đầu tư nhà máy sản xuất hiện đại, áp dụng công nghệ tiên tiến
+              nhưng vẫn giữ được nét truyền thống trong quy trình làm nhang.
+            </p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-icon green"></div>
+          <div class="timeline-content">
+            <div class="time">2016 - 2017</div>
+            <h4>Uy Tín</h4>
+            <p>
+              Nhận chứng nhận ISO về chất lượng sản phẩm và trở thành một trong
+              những thương hiệu nhang trầm uy tín tại Việt Nam.
+            </p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-icon purple"></div>
+          <div class="timeline-content">
+            <div class="time">2020 - 2021</div>
+            <h4>Đa Kênh</h4>
+            <p>
+              Ra mắt hệ thống cửa hàng và website thương mại điện tử, mang sản
+              phẩm đến gần hơn với khách hàng trên toàn quốc.
+            </p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-icon orange"></div>
+          <div class="timeline-content">
+            <div class="time">2024 - Tới nay</div>
+            <h4>Tương Lai</h4>
+            <p>
+              Tiếp tục nghiên cứu, phát triển sản phẩm mới và chuẩn bị mở rộng
+              thị trường ra nước ngoài, quảng bá văn hóa Việt Nam đến thế giới.
+            </p>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- Team Section -->
     <section class="py-5 bg-light">
-        <div class="container">
-            <h2 class="text-center fw-bold mb-5 text-primary-custom">Đội Ngũ Của Chúng Tôi</h2>
-            <div class="row g-4" id="teamGrid">
-                <!-- Team members will be loaded by JavaScript -->
-            </div>
+      <div class="container">
+        <h2 class="text-center fw-bold mb-5 text-primary-custom">
+          Đội Ngũ Của Chúng Tôi
+        </h2>
+        <div class="row g-4" id="teamGrid">
+          <!-- Team members will be loaded by JavaScript -->
         </div>
+      </div>
     </section>
 
     <!-- Values Section -->
     <section class="py-5 values-section">
-        <div class="container">
-            <h2 class="text-center fw-bold mb-5">Giá Trị Cốt Lõi</h2>
-            <div class="row">
-                <div class="col-md-3 col-6 mb-4">
-                    <div class="value-item">
-                        <div class="value-icon">🌿</div>
-                        <h5 class="fw-bold">Thiên Nhiên</h5>
-                        <p class="small">100% nguyên liệu tự nhiên</p>
-                    </div>
-                </div>
-                <div class="col-md-3 col-6 mb-4">
-                    <div class="value-item">
-                        <div class="value-icon">⭐</div>
-                        <h5 class="fw-bold">Chất Lượng</h5>
-                        <p class="small">Tiêu chuẩn cao nhất</p>
-                    </div>
-                </div>
-                <div class="col-md-3 col-6 mb-4">
-                    <div class="value-item">
-                        <div class="value-icon">❤️</div>
-                        <h5 class="fw-bold">Tận Tâm</h5>
-                        <p class="small">Phục vụ tận tình</p>
-                    </div>
-                </div>
-                <div class="col-md-3 col-6 mb-4">
-                    <div class="value-item">
-                        <div class="value-icon">🏆</div>
-                        <h5 class="fw-bold">Uy Tín</h5>
-                        <p class="small">Xây dựng niềm tin</p>
-                    </div>
-                </div>
+      <div class="container">
+        <h2 class="text-center fw-bold mb-5">Giá Trị Cốt Lõi</h2>
+        <div class="row">
+          <div class="col-md-3 col-6 mb-4">
+            <div class="value-item">
+              <div class="value-icon">🌿</div>
+              <h5 class="fw-bold">Thiên Nhiên</h5>
+              <p class="small">100% nguyên liệu tự nhiên</p>
             </div>
+          </div>
+          <div class="col-md-3 col-6 mb-4">
+            <div class="value-item">
+              <div class="value-icon">⭐</div>
+              <h5 class="fw-bold">Chất Lượng</h5>
+              <p class="small">Tiêu chuẩn cao nhất</p>
+            </div>
+          </div>
+          <div class="col-md-3 col-6 mb-4">
+            <div class="value-item">
+              <div class="value-icon">❤️</div>
+              <h5 class="fw-bold">Tận Tâm</h5>
+              <p class="small">Phục vụ tận tình</p>
+            </div>
+          </div>
+          <div class="col-md-3 col-6 mb-4">
+            <div class="value-item">
+              <div class="value-icon">🏆</div>
+              <h5 class="fw-bold">Uy Tín</h5>
+              <p class="small">Xây dựng niềm tin</p>
+            </div>
+          </div>
         </div>
+      </div>
     </section>
 
     <!-- Footer -->
     <footer class="py-5">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 mb-4">
-                    <h5 class="mb-3">Hương Trầm Việt</h5>
-                    <p>Nhang trầm hương cao cấp từ thiên nhiên. Mang đến sự bình yên và thanh tịnh cho ngôi nhà bạn.</p>
-                    <div class="social-links mt-3">
-                        <a href="#" class="text-white me-3"><i class="bi bi-facebook"></i></a>
-                        <a href="#" class="text-white me-3"><i class="bi bi-instagram"></i></a>
-                        <a href="#" class="text-white me-3"><i class="bi bi-youtube"></i></a>
-                        <a href="#" class="text-white"><i class="bi bi-tiktok"></i></a>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-4 mb-4">
-                    <h6 class="mb-3">Liên Kết</h6>
-                    <ul class="list-unstyled">
-                        <li><a href="index.html">Trang Chủ</a></li>
-                        <li><a href="product.html">Sản Phẩm</a></li>
-                        <li><a href="about.html">Giới Thiệu</a></li>
-                        <li><a href="contact.html">Liên Hệ</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-3 col-md-4 mb-4">
-                    <h6 class="mb-3">Hỗ Trợ</h6>
-                    <ul class="list-unstyled">
-                        <li><a href="#">Chính Sách Đổi Trả</a></li>
-                        <li><a href="#">Phương Thức Thanh Toán</a></li>
-                        <li><a href="#">Vận Chuyển</a></li>
-                        <li><a href="#">Câu Hỏi Thường Gặp</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-3 col-md-4 mb-4">
-                    <h6 class="mb-3">Liên Hệ</h6>
-                    <ul class="list-unstyled">
-                        <li><i class="bi bi-geo-alt me-2"></i>123 Đường ABC, Q1, TP.HCM</li>
-                        <li><i class="bi bi-telephone me-2"></i>0901 234 567</li>
-                        <li><i class="bi bi-envelope me-2"></i>contact@huongtramviet.com</li>
-                    </ul>
-                </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4 mb-4">
+            <h5 class="mb-3">Hương Trầm Việt</h5>
+            <p>
+              Nhang trầm hương cao cấp từ thiên nhiên. Mang đến sự bình yên và
+              thanh tịnh cho ngôi nhà bạn.
+            </p>
+            <div class="social-links mt-3">
+              <a href="#" class="text-white me-3"
+                ><i class="bi bi-facebook"></i
+              ></a>
+              <a href="#" class="text-white me-3"
+                ><i class="bi bi-instagram"></i
+              ></a>
+              <a href="#" class="text-white me-3"
+                ><i class="bi bi-youtube"></i
+              ></a>
+              <a href="#" class="text-white"><i class="bi bi-tiktok"></i></a>
             </div>
-            <hr class="my-4">
-            <div class="text-center">
-                <p class="mb-0">&copy; 2024 Hương Trầm Việt. All rights reserved.</p>
-            </div>
+          </div>
+          <div class="col-lg-2 col-md-4 mb-4">
+            <h6 class="mb-3">Liên Kết</h6>
+            <ul class="list-unstyled">
+              <li><a href="index.html">Trang Chủ</a></li>
+              <li><a href="product.html">Sản Phẩm</a></li>
+              <li><a href="about.html">Giới Thiệu</a></li>
+              <li><a href="contact.html">Liên Hệ</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-3 col-md-4 mb-4">
+            <h6 class="mb-3">Hỗ Trợ</h6>
+            <ul class="list-unstyled">
+              <li><a href="#">Chính Sách Đổi Trả</a></li>
+              <li><a href="#">Phương Thức Thanh Toán</a></li>
+              <li><a href="#">Vận Chuyển</a></li>
+              <li><a href="#">Câu Hỏi Thường Gặp</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-3 col-md-4 mb-4">
+            <h6 class="mb-3">Liên Hệ</h6>
+            <ul class="list-unstyled">
+              <li>
+                <i class="bi bi-geo-alt me-2"></i>123 Đường ABC, Q1, TP.HCM
+              </li>
+              <li><i class="bi bi-telephone me-2"></i>0901 234 567</li>
+              <li>
+                <i class="bi bi-envelope me-2"></i>contact@huongtramviet.com
+              </li>
+            </ul>
+          </div>
         </div>
+        <hr class="my-4" />
+        <div class="text-center">
+          <p class="mb-0">&copy; 2024 Hương Trầm Việt. All rights reserved.</p>
+        </div>
+      </div>
     </footer>
 
     <!-- Team Member Detail Modal -->
     <div class="modal fade" id="teamModal" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header" style="background: linear-gradient(135deg, var(--dark-brown), var(--primary-color)); color: white;">
-                    <h5 class="modal-title" id="modalMemberName"></h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body text-center">
-                    <img id="modalMemberImage" src="" class="rounded-circle mb-3" 
-                         style="width: 150px; height: 150px; object-fit: cover;" alt="">
-                    <h5 id="modalMemberPosition" class="text-primary-custom mb-3"></h5>
-                    <p id="modalMemberBio" class="text-muted"></p>
-                    <div class="row mt-4">
-                        <div class="col-6">
-                            <small class="text-muted d-block">Kinh Nghiệm</small>
-                            <strong id="modalMemberExperience"></strong>
-                        </div>
-                        <div class="col-6">
-                            <small class="text-muted d-block">Chuyên Môn</small>
-                            <strong id="modalMemberExpertise"></strong>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                    <a href="contact.html" class="btn btn-primary">Liên Hệ</a>
-                </div>
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div
+            class="modal-header"
+            style="
+              background: linear-gradient(
+                135deg,
+                var(--dark-brown),
+                var(--primary-color)
+              );
+              color: white;
+            "
+          >
+            <h5 class="modal-title" id="modalMemberName"></h5>
+            <button
+              type="button"
+              class="btn-close btn-close-white"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <div class="modal-body text-center">
+            <img
+              id="modalMemberImage"
+              src=""
+              class="rounded-circle mb-3"
+              style="width: 150px; height: 150px; object-fit: cover"
+              alt=""
+            />
+            <h5 id="modalMemberPosition" class="text-primary-custom mb-3"></h5>
+            <p id="modalMemberBio" class="text-muted"></p>
+            <div class="row mt-4">
+              <div class="col-6">
+                <small class="text-muted d-block">Kinh Nghiệm</small>
+                <strong id="modalMemberExperience"></strong>
+              </div>
+              <div class="col-6">
+                <small class="text-muted d-block">Chuyên Môn</small>
+                <strong id="modalMemberExpertise"></strong>
+              </div>
             </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Đóng
+            </button>
+            <a href="contact.html" class="btn btn-primary">Liên Hệ</a>
+          </div>
         </div>
+      </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/common.js"></script>
     <script src="js/about.js"></script>
     <script src="js/chatbox.js"></script>
-</body>
+  </body>
 </html>
