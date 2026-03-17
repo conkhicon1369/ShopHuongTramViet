@@ -761,3 +761,9 @@ footer a:hover {
     font-size: 14px;
   }
 }
+.r1 {
+  text-align: center;
+}
+.whouse {
+  background: linear-gradient(135deg, #f2e2b5, #d3ddf2, #eeceb8);
+}
