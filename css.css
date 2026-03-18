@@ -767,3 +767,11 @@ footer a:hover {
 .whouse {
   background: linear-gradient(135deg, #f2e2b5, #d3ddf2, #eeceb8);
 }
+
+/* Fix hover nút Đăng Nhập trên navbar */
+.navbar .nav-link.btn-outline-light:hover,
+.navbar .nav-link.btn-outline-light:focus {
+  background-color: transparent !important;
+  color: white !important;
+  border-color: white !important;
+}

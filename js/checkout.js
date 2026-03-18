@@ -209,10 +209,12 @@ function placeOrder() {
         status: 'pending'
     };
     
-    // Save order to localStorage (in production, send to backend)
-    const orders = JSON.parse(localStorage.getItem('orders') || '[]');
-    orders.push(orderData);
-    localStorage.setItem('orders', JSON.stringify(orders));
+    // Gắn userId nếu đang đăng nhập (để lọc đơn theo user sau này)
+    const currentUser = StorageManager.getCurrentUser();
+    if (currentUser) orderData.userId = currentUser.id;
+
+    // Lưu vào localStorage key: "htv_orders"  ← xem tại F12 > Application
+    StorageManager.saveOrder(orderData);
     
     // Clear cart
     StorageManager.clearCart();
