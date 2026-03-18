@@ -146,9 +146,6 @@ function createProductCard(product) {
                     ${product.badge ? `<span class="product-badge">${product.badge}</span>` : ''}
                 </div>
                 <div class="card-body">
-                    <span class="badge" style="background-color: var(--accent-color); margin-bottom: 10px;">
-                        ${product.category}
-                    </span>
                     <h5 class="card-title">${product.name}</h5>
                     <p class="card-text text-muted small">
                         ${product.description.substring(0, 80)}...
