@@ -79,12 +79,12 @@
               </a>
               <ul class="dropdown-menu">
                 <li>
-                  <a class="dropdown-item" href="#"
+                  <a class="dropdown-item" href="account.html"
                     ><i class="bi bi-person"></i> Tài khoản</a
                   >
                 </li>
                 <li>
-                  <a class="dropdown-item" href="#"
+                  <a class="dropdown-item" href="orders.html"
                     ><i class="bi bi-box-seam"></i> Đơn hàng</a
                   >
                 </li>
@@ -146,7 +146,6 @@
         </div>
       </div>
     </section>
-
     <!-- Contact Form Section -->
     <section class="py-5 bg-light">
       <div class="container">
@@ -186,31 +185,27 @@
                     </div>
                   </div>
                 </div>
-                <div class="row">
-                  <div class="col-md-6 mb-3">
-                    <label for="email" class="form-label">Email *</label>
-                    <input
-                      type="email"
-                      class="form-control"
-                      id="email"
-                      placeholder="email@example.com"
-                      required
-                    />
-                    <div class="invalid-feedback">
-                      Vui lòng nhập email hợp lệ
-                    </div>
-                  </div>
-                  <div class="col-md-6 mb-3">
-                    <label for="subject" class="form-label">Chủ đề</label>
-                    <select class="form-select" id="subject">
-                      <option value="">Chọn chủ đề</option>
-                      <option value="product">Hỏi về sản phẩm</option>
-                      <option value="order">Đơn hàng</option>
-                      <option value="support">Hỗ trợ kỹ thuật</option>
-                      <option value="partner">Hợp tác kinh doanh</option>
-                      <option value="other">Khác</option>
-                    </select>
-                  </div>
+                <div class="mb-3">
+                  <label for="email" class="form-label">Email *</label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="email"
+                    placeholder="email@example.com"
+                    required
+                  />
+                  <div class="invalid-feedback">Vui lòng nhập email hợp lệ</div>
+                </div>
+                <div class="mb-3">
+                  <label for="subject" class="form-label">Chủ đề</label>
+                  <select class="form-select" id="subject">
+                    <option value="">Chọn chủ đề</option>
+                    <option value="product">Hỏi về sản phẩm</option>
+                    <option value="order">Đơn hàng</option>
+                    <option value="support">Hỗ trợ kỹ thuật</option>
+                    <option value="partner">Hợp tác kinh doanh</option>
+                    <option value="other">Khác</option>
+                  </select>
                 </div>
                 <div class="mb-3">
                   <label for="message" class="form-label">Nội dung *</label>
@@ -238,8 +233,9 @@
               </form>
             </div>
           </div>
+
           <!-- Working Hours -->
-          <div class="col-lg-4 whouse">
+          <div class="col-lg-4">
             <h3 class="text-center mb-5 text-primary-custom">
               Thời Gian Làm Việc
             </h3>
@@ -277,6 +273,139 @@
         <!-- ✅ Đóng .row ở đây -->
       </div>
     </section>
+    <!-- Contact Form Section -->
+    <!-- <section class="py-5 bg-light">
+        <div class="container">
+          <div class="row gx-2">
+            <div class="col-lg-8 ">
+              <div class="contact-card">
+                <h3 class="text-center mb-4 text-primary-custom">
+                  Gửi Tin Nhắn Cho Chúng Tôi
+                </h3>
+                <div id="alertContainer"></div>
+                <form id="contactForm" class="needs-validation" novalidate>
+                  <div class="row">
+                    <div class="col-md-6 mb-3">
+                      <label for="fullName" class="form-label"
+                        >Họ và tên *</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="fullName"
+                        required
+                      />
+                      <div class="invalid-feedback">Vui lòng nhập họ tên</div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label for="phone" class="form-label"
+                        >Số điện thoại *</label
+                      >
+                      <input
+                        type="tel"
+                        class="form-control"
+                        id="phone"
+                        placeholder="0901234567"
+                        required
+                      />
+                      <div class="invalid-feedback">
+                        Vui lòng nhập số điện thoại hợp lệ (10 số)
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="mb-3">
+                    <label for="email" class="form-label">Email *</label>
+                    <input
+                      type="email"
+                      class="form-control"
+                      id="email"
+                      placeholder="email@example.com"
+                      required
+                    />
+                    <div class="invalid-feedback">
+                      Vui lòng nhập email hợp lệ
+                    </div>
+                  </div>
+
+                  <div class="mb-3">
+                    <label for="subject" class="form-label">Chủ đề</label>
+                    <select class="form-select" id="subject">
+                      <option value="">Chọn chủ đề</option>
+                      <option value="product">Hỏi về sản phẩm</option>
+                      <option value="order">Đơn hàng</option>
+                      <option value="support">Hỗ trợ kỹ thuật</option>
+                      <option value="partner">Hợp tác kinh doanh</option>
+                      <option value="other">Khác</option>
+                    </select>
+                  </div>
+
+                  <div class="mb-3">
+                    <label for="message" class="form-label">Nội dung *</label>
+                    <textarea
+                      class="form-control"
+                      id="message"
+                      rows="5"
+                      placeholder="Nhập nội dung tin nhắn của bạn..."
+                      required
+                    ></textarea>
+                    <div class="d-flex justify-content-between mt-1">
+                      <div class="invalid-feedback">
+                        Vui lòng nhập nội dung tin nhắn
+                      </div>
+                      <small class="char-counter"
+                        ><span id="charCount">0</span>/500</small
+                      >
+                    </div>
+                  </div>
+                  <div class="text-center">
+                    <button type="submit" class="btn btn-primary btn-lg px-5">
+                      <i class="bi bi-send me-2"></i>Gửi Tin Nhắn
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        <!-- Working Hours Section -->
+    <!-- <div class="col-lg-4">
+          <h3 class="text-center mb-5 text-primary-custom">
+            Thời Gian Làm Việc
+          </h3>
+          
+              <div class="contact-card">
+                <div class="table-responsive">
+                  <table class="table table-borderless mb-0">
+                    <tbody>
+                      <tr>
+                        <td><strong>Thứ 2 - Thứ 6:</strong></td>
+                        <td class="text-end">8:00 - 18:00</td>
+                      </tr>
+                      <tr>
+                        <td><strong>Thứ 7:</strong></td>
+                        <td class="text-end">8:00 - 17:00</td>
+                      </tr>
+                      <tr>
+                        <td><strong>Chủ Nhật:</strong></td>
+                        <td class="text-end">9:00 - 16:00</td>
+                      </tr>
+                      <tr>
+                        <td><strong>Ngày lễ:</strong></td>
+                        <td class="text-end">Nghỉ</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <hr />
+                <p class="text-center text-muted mb-0">
+                  <i class="bi bi-info-circle me-2"></i>
+                  Chúng tôi sẽ phản hồi trong vòng 24 giờ
+                </p>
+              </div>
+  
+        </div>
+    </div>
+    </section>  -->
 
     <!-- FAQ Section -->
     <section class="py-5 faq-section bg-light">
