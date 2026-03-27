@@ -1,9 +1,43 @@
-// ==================== AUTHENTICATION JAVASCRIPT ====================
+// ==================== AUTH.JS ====================
 
-// Show/Hide forms
-function showLoginForm() {
-    document.getElementById('loginForm').style.display = 'block';
-    document.getElementById('registerForm').style.display = 'none';
+const MOCK_USERS = [
+    {
+        id: 1,
+        name: 'Quản Trị Viên',
+        email: 'admin@huongtramviet.com',
+        password: 'admin123',
+        phone: '0901 000 001',
+        role: 'admin',
+        status: 'active',
+        spending: 0,
+        joined: '2023-01-01'
+    },
+    {
+        id: 2,
+        name: 'Nguyễn Văn A',
+        email: 'user@email.com',
+        password: '123456',
+        phone: '0901 234 567',
+        role: 'user',
+        status: 'active',
+        spending: 2400000,
+        joined: '2023-03-22'
+    }
+];
+
+function getAllUsers() {
+    const stored = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
+    const merged = [...MOCK_USERS];
+    stored.forEach(su => {
+        if (!merged.find(u => u.email === su.email)) merged.push(su);
+    });
+    return merged;
+}
+
+function saveRegisteredUser(user) {
+    const stored = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
+    stored.push(user);
+    localStorage.setItem('registeredUsers', JSON.stringify(stored));
 }
 
 function showRegisterForm() {
@@ -11,191 +45,125 @@ function showRegisterForm() {
     document.getElementById('registerForm').style.display = 'block';
 }
 
-// Handle login
-function handleLogin(e) {
+function showLoginForm() {
+    document.getElementById('registerForm').style.display = 'none';
+    document.getElementById('loginForm').style.display = 'block';
+}
+
+function showFieldError(fieldId, message) {
+    const field = document.getElementById(fieldId);
+    field.classList.add('is-invalid');
+    let fb = field.parentElement.querySelector('.invalid-feedback');
+    if (!fb) {
+        fb = document.createElement('div');
+        fb.className = 'invalid-feedback';
+        field.parentElement.appendChild(fb);
+    }
+    fb.textContent = message;
+}
+
+function clearErrors() {
+    document.querySelectorAll('.is-invalid').forEach(el => el.classList.remove('is-invalid'));
+    document.querySelectorAll('.invalid-feedback').forEach(el => el.remove());
+    document.querySelectorAll('.form-alert').forEach(el => el.remove());
+}
+
+function showFormAlert(formId, message, type = 'danger') {
+    const form = document.getElementById(formId);
+    let old = form.querySelector('.form-alert');
+    if (old) old.remove();
+    const div = document.createElement('div');
+    div.className = `alert alert-${type} form-alert mt-3 mb-0`;
+    div.innerHTML = `<i class="bi bi-${type === 'danger' ? 'exclamation-triangle' : 'check-circle'} me-2"></i>${message}`;
+    form.appendChild(div);
+    if (type !== 'danger') setTimeout(() => div.remove(), 4000);
+}
+
+// LOGIN
+document.getElementById('loginForm').addEventListener('submit', function (e) {
     e.preventDefault();
-    
-    const email = document.getElementById('loginEmail').value.trim();
+    clearErrors();
+
+    const email    = document.getElementById('loginEmail').value.trim().toLowerCase();
     const password = document.getElementById('loginPassword').value;
-    const rememberMe = document.getElementById('rememberMe').checked;
-    
-    // Validation
-    if (!email || !password) {
-        showNotification('Vui lòng điền đầy đủ thông tin', 'warning');
-        return;
-    }
-    
-    // Check user credentials
-    const user = StorageManager.findUser(email, password);
-    
-    if (user) {
-        // Login successful
-        StorageManager.setCurrentUser(user);
-        
-        if (rememberMe) {
-            localStorage.setItem('rememberMe', 'true');
-        }
-        
-        showNotification('Đăng nhập thành công!', 'success');
-        
-        // Check if there's a redirect URL (from cart/checkout)
-        const redirectUrl = sessionStorage.getItem('redirectAfterLogin');
-        
-        // Redirect after 1 second
-        setTimeout(() => {
-            if (redirectUrl) {
-                sessionStorage.removeItem('redirectAfterLogin');
-                window.location.href = redirectUrl;
-            } else {
-                window.location.href = 'index.html';
-            }
-        }, 1000);
-    } else {
-        showNotification('Email hoặc mật khẩu không đúng', 'danger');
-    }
-}
+    const remember = document.getElementById('rememberMe').checked;
 
-// Handle registration
-function handleRegister(e) {
-    e.preventDefault();
-    
-    const name = document.getElementById('registerName').value.trim();
-    const email = document.getElementById('registerEmail').value.trim();
-    const phone = document.getElementById('registerPhone').value.trim();
-    const password = document.getElementById('registerPassword').value;
-    const confirmPassword = document.getElementById('registerConfirmPassword').value;
-    const agreeTerms = document.getElementById('agreeTerms').checked;
-    
-    // Validation
-    if (!name || !email || !phone || !password || !confirmPassword) {
-        showNotification('Vui lòng điền đầy đủ thông tin', 'warning');
+    let ok = true;
+    if (!email)    { showFieldError('loginEmail', 'Vui lòng nhập email'); ok = false; }
+    if (!password) { showFieldError('loginPassword', 'Vui lòng nhập mật khẩu'); ok = false; }
+    if (!ok) return;
+
+    const user = getAllUsers().find(u => u.email === email && u.password === password);
+
+    if (!user) {
+        showFormAlert('loginForm', 'Email hoặc mật khẩu không đúng.');
         return;
     }
-    
-    if (!isValidEmail(email)) {
-        showNotification('Email không hợp lệ', 'danger');
+    if (user.status === 'locked') {
+        showFormAlert('loginForm', 'Tài khoản đã bị khóa. Vui lòng liên hệ hỗ trợ.');
         return;
     }
-    
-    if (!isValidPhone(phone)) {
-        showNotification('Số điện thoại không hợp lệ', 'danger');
-        return;
-    }
-    
-    if (password.length < 6) {
-        showNotification('Mật khẩu phải có ít nhất 6 ký tự', 'warning');
-        return;
-    }
-    
-    if (password !== confirmPassword) {
-        showNotification('Mật khẩu xác nhận không khớp', 'danger');
-        return;
-    }
-    
-    if (!agreeTerms) {
-        showNotification('Vui lòng đồng ý với điều khoản sử dụng', 'warning');
-        return;
-    }
-    
-    // Check if email already exists
-    const users = StorageManager.getUsers();
-    if (users.find(u => u.email === email)) {
-        showNotification('Email đã được sử dụng', 'danger');
-        return;
-    }
-    
-    // Create new user
-    const newUser = {
-        id: Date.now(),
-        name: name,
-        email: email,
-        phone: phone,
-        password: password, // In production, this should be hashed
-        createdAt: new Date().toISOString()
-    };
-    
-    // Save user
-    StorageManager.addUser(newUser);
-    
-    // Auto login
-    StorageManager.setCurrentUser(newUser);
-    
-    showNotification('Đăng ký thành công!', 'success');
-    
-    // Check if there's a redirect URL (from cart/checkout)
-    const redirectUrl = sessionStorage.getItem('redirectAfterLogin');
-    
-    // Redirect after 1 second
+
+    const session = { id: user.id, name: user.name, email: user.email, phone: user.phone, role: user.role };
+    localStorage.setItem('currentUser', JSON.stringify(session));
+    if (!remember) sessionStorage.setItem('currentUser', JSON.stringify(session));
+
+    showFormAlert('loginForm', 'Đăng nhập thành công! Đang chuyển hướng...', 'success');
+
     setTimeout(() => {
-        if (redirectUrl) {
-            sessionStorage.removeItem('redirectAfterLogin');
-            window.location.href = redirectUrl;
-        } else {
-            window.location.href = 'index.html';
-        }
+        window.location.href = user.role === 'admin' ? 'account.html' : 'index.html';
     }, 1000);
-}
-
-// Validation helpers
-function isValidEmail(email) {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-}
-
-function isValidPhone(phone) {
-    return /^[0-9]{10,11}$/.test(phone);
-}
-
-// Logout function
-function logout() {
-    if (confirm('Bạn có chắc muốn đăng xuất?')) {
-        StorageManager.logout();
-        showNotification('Đã đăng xuất', 'success');
-    }
-}
-
-// Initialize auth page
-document.addEventListener('DOMContentLoaded', () => {
-    const loginForm = document.getElementById('loginForm');
-    const registerForm = document.getElementById('registerForm');
-    
-    if (loginForm) {
-        loginForm.addEventListener('submit', handleLogin);
-    }
-    
-    if (registerForm) {
-        registerForm.addEventListener('submit', handleRegister);
-    }
-    
-    // Check if already logged in
-    const currentUser = StorageManager.getCurrentUser();
-    if (currentUser && window.location.pathname.includes('login.html')) {
-        // Check if there's a redirect URL
-        const redirectUrl = sessionStorage.getItem('redirectAfterLogin');
-        if (redirectUrl) {
-            sessionStorage.removeItem('redirectAfterLogin');
-            window.location.href = redirectUrl;
-        } else {
-            window.location.href = 'index.html';
-        }
-    }
-    
-    // Initialize with default account for testing
-    const users = StorageManager.getUsers();
-    if (users.length === 0) {
-        // Add a default test account
-        StorageManager.addUser({
-            id: 1,
-            name: 'Người Dùng Demo',
-            email: 'demo@huongtramviet.com',
-            phone: '0901234567',
-            password: '123456',
-            createdAt: new Date().toISOString()
-        });
-        console.log('Demo account created: demo@huongtramviet.com / 123456');
-    }
 });
 
-// Export functions for use in other files
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { handleLogin, handleRegister, logout };
-}
+// REGISTER
+document.getElementById('registerForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    clearErrors();
+
+    const name    = document.getElementById('registerName').value.trim();
+    const email   = document.getElementById('registerEmail').value.trim().toLowerCase();
+    const phone   = document.getElementById('registerPhone').value.trim();
+    const pw      = document.getElementById('registerPassword').value;
+    const confirm = document.getElementById('registerConfirmPassword').value;
+    const agree   = document.getElementById('agreeTerms').checked;
+
+    let ok = true;
+    if (!name)                               { showFieldError('registerName', 'Vui lòng nhập họ tên'); ok = false; }
+    if (!email || !/\S+@\S+\.\S+/.test(email)) { showFieldError('registerEmail', 'Email không hợp lệ'); ok = false; }
+    if (!phone || !/^0\d{9}$/.test(phone.replace(/\s/g, ''))) { showFieldError('registerPhone', 'Số điện thoại không hợp lệ (VD: 0901234567)'); ok = false; }
+    if (!pw || pw.length < 6)               { showFieldError('registerPassword', 'Mật khẩu tối thiểu 6 ký tự'); ok = false; }
+    if (pw !== confirm)                      { showFieldError('registerConfirmPassword', 'Mật khẩu xác nhận không khớp'); ok = false; }
+    if (!agree)                              { showFormAlert('registerForm', 'Vui lòng đồng ý với điều khoản'); return; }
+    if (!ok) return;
+
+    const users = getAllUsers();
+    if (users.find(u => u.email === email)) {
+        showFieldError('registerEmail', 'Email này đã được đăng ký');
+        return;
+    }
+
+    saveRegisteredUser({
+        id: Date.now(), name, email, phone, password: pw,
+        role: 'user', status: 'active', spending: 0,
+        joined: new Date().toISOString().split('T')[0]
+    });
+
+    showFormAlert('registerForm', 'Đăng ký thành công! Chuyển sang đăng nhập...', 'success');
+    setTimeout(() => {
+        showLoginForm();
+        document.getElementById('loginEmail').value = email;
+    }, 1500);
+});
+
+// DEMO HINT
+window.addEventListener('DOMContentLoaded', () => {
+    const hint = document.createElement('div');
+    hint.className = 'mt-3 p-3 rounded-3 text-center';
+    hint.style.cssText = 'background:#fff8f0; font-size:0.8rem; border:1px dashed #cd853f;';
+    hint.innerHTML = `
+        <div class="fw-bold mb-1" style="color:var(--primary-color);">🔑 Tài khoản demo</div>
+        <div class="text-muted mb-1">Admin: <kbd>admin@huongtramviet.com</kbd> / <kbd>admin123</kbd></div>
+        <div class="text-muted">User: <kbd>user@email.com</kbd> / <kbd>123456</kbd></div>
+    `;
+    document.getElementById('loginForm').appendChild(hint);
+});
