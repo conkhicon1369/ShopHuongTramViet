@@ -1,4 +1,3 @@
-
 const productsData = {
     "products": [
         {
@@ -271,4 +270,55 @@ document.addEventListener('DOMContentLoaded', () => {
     
     console.log('Index page loaded successfully!');
     console.log('Carousel auto-slide enabled (5 seconds interval)');
+});
+// ==================== SCROLL ANIMATIONS ====================
+
+function initFadeInSections() {
+    const sections = document.querySelectorAll('.fade-in-section');
+    if (!sections.length) return;
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.15 });
+
+    sections.forEach(el => observer.observe(el));
+}
+
+// ==================== COUNTER ANIMATION ====================
+
+function animateCounters() {
+    const counters = document.querySelectorAll('.counter[data-target]');
+    if (!counters.length) return;
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            const el     = entry.target;
+            const target = parseInt(el.dataset.target, 10);
+            const suffix = el.dataset.suffix || '';
+            let current  = 0;
+            const step   = Math.ceil(target / 60);
+            const timer  = setInterval(() => {
+                current += step;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                }
+                el.textContent = current.toLocaleString('vi-VN') + suffix;
+            }, 25);
+            observer.unobserve(el);
+        });
+    }, { threshold: 0.5 });
+
+    counters.forEach(el => observer.observe(el));
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    initFadeInSections();
+    animateCounters();
 });

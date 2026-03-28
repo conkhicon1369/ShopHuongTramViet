@@ -158,6 +158,7 @@ function createProductCard(product) {
                     ${product.badge ? `<span class="product-badge">${product.badge}</span>` : ''}
                 </div>
                 <div class="card-body">
+
                     <h5 class="card-title">${product.name}</h5>
                     <p class="card-text text-muted small">
                         ${product.description.substring(0, 80)}...
@@ -232,12 +233,12 @@ function addToCartQuick(productId) {
 }
 
 // Filter products by category
-function filterProducts(category) {
+function filterProducts(category, btn) {
     // Update active button
-    document.querySelectorAll('.btn-group button').forEach(btn => {
-        btn.classList.remove('active');
+    document.querySelectorAll('.btn-group button').forEach(b => {
+        b.classList.remove('active');
     });
-    event.target.classList.add('active');
+    if (btn) btn.classList.add('active');
     
     if (category === 'all') {
         filteredProducts = products;

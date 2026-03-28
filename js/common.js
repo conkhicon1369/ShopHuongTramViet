@@ -65,3 +65,63 @@ window.addEventListener('DOMContentLoaded', () => {
     updateNavbar();
     updateCartBadge();
 });
+// ==================== STORAGE MANAGER ====================
+// Wrapper object để các file cart.js, product.js, checkout.js gọi nhất quán
+
+const StorageManager = {
+    getCart() {
+        return JSON.parse(localStorage.getItem('cart') || '[]');
+    },
+
+    saveCart(cart) {
+        localStorage.setItem('cart', JSON.stringify(cart));
+        updateCartBadge();
+    },
+
+    addToCart(product) {
+        const cart = this.getCart();
+        const existing = cart.find(item => item.id === product.id);
+        if (existing) {
+            existing.quantity = (existing.quantity || 1) + 1;
+        } else {
+            cart.push({ ...product, quantity: 1 });
+        }
+        this.saveCart(cart);
+        showToast('Đã thêm vào giỏ hàng!', 'success');
+    },
+
+    removeFromCart(productId) {
+        const cart = this.getCart().filter(item => item.id !== productId);
+        this.saveCart(cart);
+        return cart;
+    },
+
+    updateCartQuantity(productId, newQuantity) {
+        const qty = parseInt(newQuantity);
+        let cart = this.getCart();
+        if (qty <= 0) {
+            cart = cart.filter(item => item.id !== productId);
+        } else {
+            const item = cart.find(item => item.id === productId);
+            if (item) item.quantity = qty;
+        }
+        this.saveCart(cart);
+        return cart;
+    },
+
+    clearCart() {
+        localStorage.removeItem('cart');
+        updateCartBadge();
+    },
+
+    getCurrentUser() {
+        return getCurrentUser();
+    }
+};
+
+// ==================== SHOW NOTIFICATION ====================
+// Alias của showToast — dùng cho cart.js, checkout.js, index.js
+
+function showNotification(msg, type = 'success') {
+    showToast(msg, type);
+}

@@ -110,6 +110,12 @@ let orders = ALL_ORDERS.map(o => ({ ...o, products: o.products.map(p => ({ ...p 
 let currentUser  = null;
 let adminCurFilter = 'all';
 
+
+// Close order detail modal - must be global for inline onclick handlers
+function closeOrderModal() {
+    const m = bootstrap.Modal.getInstance(document.getElementById('modalOrderDetail'));
+    if (m) m.hide();
+}
 // ---- BOOT ----
 window.addEventListener('DOMContentLoaded', () => {
     currentUser = getCurrentUser();
@@ -509,21 +515,20 @@ function openOrderModal(id) {
 
     const footer = document.getElementById('modalOrderFooter');
     footer.innerHTML = `<button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Đóng</button>`;
-    const closeModal = () => bootstrap.Modal.getInstance(document.getElementById('modalOrderDetail')).hide();
     if (ord.status === 'pending') {
         footer.innerHTML += `
-            <button class="btn btn-success" onclick="approveOrder('${ord.id}'); closeModal()"><i class="bi bi-check-circle me-1"></i>Duyệt đơn</button>
-            <button class="btn btn-danger"  onclick="cancelOrder('${ord.id}');  closeModal()"><i class="bi bi-x-circle me-1"></i>Hủy đơn</button>
+            <button class="btn btn-success" onclick="approveOrder('${ord.id}'); closeOrderModal()"><i class="bi bi-check-circle me-1"></i>Duyệt đơn</button>
+            <button class="btn btn-danger"  onclick="cancelOrder('${ord.id}');  closeOrderModal()"><i class="bi bi-x-circle me-1"></i>Hủy đơn</button>
         `;
     } else if (ord.status === 'approved') {
-        footer.innerHTML += `<button class="btn btn-primary" onclick="deliverOrder('${ord.id}'); closeModal()"><i class="bi bi-truck me-1"></i>Chuyển sang giao hàng</button>`;
+        footer.innerHTML += `<button class="btn btn-primary" onclick="deliverOrder('${ord.id}'); closeOrderModal()"><i class="bi bi-truck me-1"></i>Chuyển sang giao hàng</button>`;
     } else if (ord.status === 'delivering') {
-        footer.innerHTML += `<button class="btn btn-success" onclick="completeOrder('${ord.id}'); closeModal()"><i class="bi bi-check2-all me-1"></i>Xác nhận đã giao</button>`;
+        footer.innerHTML += `<button class="btn btn-success" onclick="completeOrder('${ord.id}'); closeOrderModal()"><i class="bi bi-check2-all me-1"></i>Xác nhận đã giao</button>`;
     }
-    // Attach closeModal to modal buttons
+    // Attach closeOrderModal to modal action buttons
     document.querySelectorAll('#modalOrderFooter button').forEach(btn => {
         if (btn.textContent.includes('Đóng')) return;
-        btn.addEventListener('click', closeModal);
+        btn.addEventListener('click', closeOrderModal);
     });
     new bootstrap.Modal(document.getElementById('modalOrderDetail')).show();
 }

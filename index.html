@@ -213,19 +213,19 @@
         <div class="container">
             <div class="row text-center">
                 <div class="col-md-3 mb-4">
-                    <div class="stat-number counter" data-target="1000">0</div>
+                    <div class="stat-number counter" data-target="1000" data-suffix="+">0</div>
                     <p class="mt-2">Khách Hàng Hài Lòng</p>
                 </div>
                 <div class="col-md-3 mb-4">
-                    <div class="stat-number counter" data-target="50">0</div>
+                    <div class="stat-number counter" data-target="50" data-suffix="+">0</div>
                     <p class="mt-2">Sản Phẩm Chất Lượng</p>
                 </div>
                 <div class="col-md-3 mb-4">
-                    <div class="stat-number counter" data-target="10">0</div>
+                    <div class="stat-number counter" data-target="10" data-suffix="+">0</div>
                     <p class="mt-2">Năm Kinh Nghiệm</p>
                 </div>
                 <div class="col-md-3 mb-4">
-                    <div class="stat-number counter" data-target="99">0</div>
+                    <div class="stat-number counter" data-target="99" data-suffix="%">0</div>
                     <p class="mt-2">% Hài Lòng</p>
                 </div>
             </div>
@@ -431,5 +431,15 @@
     <script src="js/common.js"></script>
     <script src="js/index.js"></script>
     <script src="js/chatbox.js"></script>
+
+    <!-- Toast Notification -->
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index:9999">
+        <div id="toastMsg" class="toast align-items-center text-bg-success border-0" role="alert">
+            <div class="d-flex">
+                <div class="toast-body" id="toastText"></div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
