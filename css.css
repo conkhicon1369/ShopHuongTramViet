@@ -999,3 +999,16 @@ footer a:hover {
   transition: width 0.6s ease;
 }
 /* ==================== ORDERS ==================== */
+#guestSection .btn {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+#guestSection .btn:hover,
+#guestSection .btn:focus,
+#guestSection .btn:active {
+  background: transparent !important;
+  color: #ffffff !important; /* màu hover giống menu */
+  box-shadow: none !important;
+}
