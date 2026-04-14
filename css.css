@@ -163,6 +163,7 @@ body {
 .product-card .card-title {
   min-height: 48px;
   margin-bottom: 10px;
+  font-size: 16px;
 }
 
 /* Phần mô tả sẽ chiếm không gian linh hoạt */
@@ -170,6 +171,7 @@ body {
   flex: 1;
   min-height: 60px;
   margin-bottom: 15px;
+  font-size: 12px;
 }
 
 /* Đẩy phần giá và nút xuống dưới cùng */
@@ -224,6 +226,7 @@ body {
   border-radius: 30px;
   padding: 10px 10px;
   font-weight: 600;
+  font-size: 12px;
   transition: all 0.3s ease;
 }
 
